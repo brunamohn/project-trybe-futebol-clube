@@ -19,9 +19,9 @@ function verifyToken(token: string): TokenPayload {
 }
 
 function decodeToken(token: string): TokenPayload | string {
-  const tokenDecoded = token.split(' ')[1];
   try {
-    const user = verify(tokenDecoded, secret) as TokenPayload;
+    const user = verify(token, secret) as TokenPayload;
+    console.log('user', user);
     return user;
   } catch (error) {
     return 'Token Invalido';

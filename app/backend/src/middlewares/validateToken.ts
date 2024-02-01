@@ -10,12 +10,14 @@ class ValidateToken {
     }
 
     try {
-      const validToken = jwtUtil.decodeToken(authorization);
+      const [type, token] = authorization.split(' ');
 
-      if (validToken === 'Token Invalido') {
+      if (type !== 'Bearer') {
         return res.status(401).json({ message: 'Token must be a valid token' });
       }
 
+      const validToken = jwtUtil.decodeToken(token);
+      res.locals.role = validToken;
       next();
     } catch (error) {
       console.error('Error validating token:', error);

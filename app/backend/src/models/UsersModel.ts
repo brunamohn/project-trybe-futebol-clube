@@ -11,14 +11,6 @@ class UserModel implements UserModelInterface {
     }
     return selectedUser.dataValues;
   }
-
-  async getRole(email: string): Promise<string | null> {
-    const user = await this.model.findOne({ where: { email } });
-    if (!user) {
-      return null;
-    }
-    return user.dataValues.role;
-  }
 }
 
 export default UserModel;

@@ -13,5 +13,4 @@ export interface LoginInterface {
 
 export interface UserModelInterface {
   validateUser(email: string): Promise<UserInterface | null>;
-  getRole(email: string): Promise<string | null >;
 }

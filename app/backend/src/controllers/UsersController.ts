@@ -29,13 +29,6 @@ class UsersController {
 
     return res.status(200).json(data);
   }
-
-  // public async verifyRole(req: Request, res: Response) {
-  //   const { token } = req.headers;
-  //   const validateRole = await this.usersService.verifyRole(token as string);
-
-  //   return res.status(mapStatusHTTP(validateRole.status)).json(validateRole.data);
-  // }
 }
 
 export default UsersController;

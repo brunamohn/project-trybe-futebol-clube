@@ -22,17 +22,6 @@ class UsersService {
 
     return { status: 'SUCCESSFUL', data: { token } };
   }
-
-  // public async verifyRole(token: string) {
-  //   const decoded = jwtUtil.decodeToken(token);
-  //   const user = await this.userModel.getRole(decoded) as string;
-
-  //   if (!user) {
-  //     return { status: 'UNAUTHORIZED', data: { message: 'Invalid token!' } };
-  //   }
-
-  //   return { status: 'SUCCESSFUL', data: { user } };
-  // }
 }
 
 export default UsersService;
