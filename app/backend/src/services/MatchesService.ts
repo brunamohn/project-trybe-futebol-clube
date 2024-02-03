@@ -11,6 +11,12 @@ class MatchesService {
 
     return { status: 'SUCCESSFUL', data: allMatches };
   }
+
+  public async getMatchesProgress(inProgress: boolean) {
+    const mantchesProgress = await this.matchesModel.getMatchesProgress(inProgress);
+
+    return { status: 'SUCCESSFUL', data: mantchesProgress };
+  }
 }
 
 export default MatchesService;

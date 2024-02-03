@@ -7,7 +7,15 @@ class MatchesController {
     private matchesService = new MatchesService(),
   ) { }
 
-  public async getAllMatches(_req: Request, res: Response) {
+  public async getAllMatches(req: Request, res: Response) {
+    if (req.query.inProgress) {
+      const { inProgress } = req.query;
+      const inProgressBoolean = inProgress === 'true';
+      const { data } = await this.matchesService.getMatchesProgress(inProgressBoolean);
+
+      return res.status(200).json(data);
+    }
+
     const { data } = await this.matchesService.getAllMatches();
 
     return res.status(200).json(data);

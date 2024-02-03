@@ -5,7 +5,7 @@ import { MatchesInterface, MatchesModelInterface } from '../Interfaces/MatchesIn
 class MatchesModel implements MatchesModelInterface {
   private model = SequelizeMatches;
 
-  async getAllMatches(): Promise<MatchesInterface[]> {
+  public async getAllMatches(): Promise<MatchesInterface[]> {
     const allMatches = await this.model.findAll({
       include: [
         { model: SequelizeTeams, as: 'homeTeam', attributes: { exclude: ['id'] } },
@@ -14,6 +14,18 @@ class MatchesModel implements MatchesModelInterface {
     });
 
     return allMatches;
+  }
+
+  public async getMatchesProgress(inProgress: boolean): Promise<MatchesInterface[]> {
+    const inProgressMatches = await this.model.findAll({
+      where: { inProgress },
+      include: [
+        { model: SequelizeTeams, as: 'homeTeam', attributes: { exclude: ['id'] } },
+        { model: SequelizeTeams, as: 'awayTeam', attributes: { exclude: ['id'] } },
+      ],
+    });
+
+    return inProgressMatches;
   }
 }
 

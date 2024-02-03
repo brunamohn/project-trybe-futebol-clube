@@ -9,4 +9,5 @@ export interface MatchesInterface {
 
 export interface MatchesModelInterface {
   getAllMatches(): Promise<MatchesInterface[]>;
+  getMatchesProgress(inProgress: boolean): Promise<MatchesInterface[]>;
 }
