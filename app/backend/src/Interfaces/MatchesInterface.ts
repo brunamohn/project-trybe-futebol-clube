@@ -6,3 +6,7 @@ export interface MatchesInterface {
   awayTeamGoals: number;
   inProgress: boolean;
 }
+
+export interface MatchesModelInterface {
+  getAllMatches(): Promise<MatchesInterface[]>;
+}
