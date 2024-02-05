@@ -27,6 +27,32 @@ class MatchesModel implements MatchesModelInterface {
 
     return inProgressMatches;
   }
+
+  public async finishMatch(matchId: number): Promise<{ message: string }> {
+    const match = await this.model.findByPk(matchId);
+    if (!match) {
+      throw new Error('Match not found');
+    }
+
+    await match.update({ inProgress: false });
+
+    return { message: 'Finished' };
+  }
+
+  public async updateMatchScore(
+    matchId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<MatchesInterface> {
+    const match = await this.model.findByPk(matchId);
+    if (!match) {
+      throw new Error('Match not found');
+    }
+
+    const updatedMatch = await match.update({ homeTeamGoals, awayTeamGoals });
+
+    return updatedMatch;
+  }
 }
 
 export default MatchesModel;

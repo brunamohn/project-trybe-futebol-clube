@@ -10,4 +10,10 @@ export interface MatchesInterface {
 export interface MatchesModelInterface {
   getAllMatches(): Promise<MatchesInterface[]>;
   getMatchesProgress(inProgress: boolean): Promise<MatchesInterface[]>;
+  finishMatch(matchId: number): Promise<{ message: string }>;
+  updateMatchScore(
+    matchId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<MatchesInterface>;
 }
