@@ -16,4 +16,5 @@ export interface MatchesModelInterface {
     homeTeamGoals: number,
     awayTeamGoals: number,
   ): Promise<MatchesInterface>;
+  createMatch(match: MatchesInterface): Promise<MatchesInterface | null>;
 }

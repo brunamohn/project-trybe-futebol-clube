@@ -1,5 +1,5 @@
 import MatchesModel from '../models/MatchesModel';
-import { MatchesModelInterface } from '../Interfaces/MatchesInterface';
+import { MatchesModelInterface, MatchesInterface } from '../Interfaces/MatchesInterface';
 
 class MatchesService {
   constructor(
@@ -29,6 +29,16 @@ class MatchesService {
       .updateMatchScore(matchId, homeTeamGoals, awayTeamGoals);
 
     return { status: 'SUCCESSFUL', data: updatedMatch };
+  }
+
+  public async createMatch(match: MatchesInterface) {
+    const newMatch = await this.matchesModel.createMatch(match);
+
+    if (!newMatch) {
+      return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
+    }
+
+    return { status: 'CREATED', data: newMatch };
   }
 }
 

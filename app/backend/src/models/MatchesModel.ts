@@ -53,6 +53,27 @@ class MatchesModel implements MatchesModelInterface {
 
     return updatedMatch;
   }
+
+  public async createMatch(match: MatchesInterface): Promise<MatchesInterface | null> {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = match;
+
+    const verifyHomeTeam = await SequelizeTeams.findByPk(homeTeamId);
+    const verifyAwayTeam = await SequelizeTeams.findByPk(awayTeamId);
+
+    if (!verifyHomeTeam || !verifyAwayTeam) {
+      return null;
+    }
+
+    const newMatch = await this.model.create({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    });
+
+    return newMatch;
+  }
 }
 
 export default MatchesModel;
