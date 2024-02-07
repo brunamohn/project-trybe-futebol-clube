@@ -6,6 +6,6 @@ const leaderBoardRouter = Router();
 const leaderBoardController = new LeaderBoardController();
 
 leaderBoardRouter
-  .get('/', (req: Request, res: Response) => leaderBoardController.getLeaderBoard(req, res));
+  .get('/', (req: Request, res: Response) => leaderBoardController.getLeaderBoardHome(req, res));
 
 export default leaderBoardRouter;

@@ -6,8 +6,8 @@ class LeaderBoardController {
     private leaderBoardService = new LeaderBoardService(),
   ) { }
 
-  public async getLeaderBoard(_req: Request, res: Response) {
-    const leaderBoard = await this.leaderBoardService.getLeaderBoard();
+  public async getLeaderBoardHome(_req: Request, res: Response) {
+    const leaderBoard = await this.leaderBoardService.getLeaderBoardHome();
     return res.status(200).json(leaderBoard.data);
   }
 }

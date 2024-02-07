@@ -73,7 +73,7 @@ function getEfficiency(team: TeamInterface, matches: MatchesInterface[]) {
   const totalPoints = getTotalPoints(team, matches);
   const totalGames = getTotalGames(team, matches);
 
-  return `${((totalPoints / (totalGames * 3)) * 100).toFixed(2)}%`;
+  return ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
 }
 
 function getLeaderBoardData(team: TeamInterface, matches: MatchesInterface[])
