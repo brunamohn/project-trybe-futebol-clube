@@ -13,8 +13,21 @@ class LeaderBoardService {
     const finishedMatches = await this.matchesModel.getMatchesProgress(false);
 
     const leaderBoard = allTeams.map((team) => getLeaderBoardData(team, finishedMatches));
-
-    return { status: 'SUCCESSFUL', data: leaderBoard };
+    console.log('1', leaderBoard);
+    const sortedLeaderBoard = leaderBoard.sort((a, b) => {
+      if (a.totalPoints !== b.totalPoints) {
+        return b.totalPoints - a.totalPoints;
+      }
+      if (a.totalVictories !== b.totalVictories) {
+        return b.totalVictories - a.totalVictories;
+      }
+      if (a.goalsBalance !== b.goalsBalance) {
+        return b.goalsBalance - a.goalsBalance;
+      }
+      return b.goalsFavor - a.goalsFavor;
+    });
+    console.log('2', sortedLeaderBoard);
+    return { status: 'SUCCESSFUL', data: sortedLeaderBoard };
   }
 }
 

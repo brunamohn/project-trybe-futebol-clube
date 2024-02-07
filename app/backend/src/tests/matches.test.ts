@@ -5,7 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import MatchesModel from '../database/models/MatchesModel';
-import MatchesMock from './Mocks/matchesMock';
+import { MatchesMock, SameTeamMock } from './Mocks/matchesMock';
 
 
 chai.use(chaiHttp);
@@ -59,13 +59,22 @@ describe('Testing Matches', () => {
   });
 
   it('Testing create Match with same team', async () => {
-    const match = MatchesMock[0];
-    match.homeTeamId = 1;
-    match.awayTeamId = 1;
+    const match = SameTeamMock;
+    sinon.stub(MatchesModel, 'create').resolves(match as any);
 
     const {status, body} = await chai.request(app).post('/matches').send(match);
 
     expect(status).to.be.eq(422);
     expect(body).to.be.deep.eq({message: 'It is not possible to create a match with two equal teams'});
+  });
+
+  it('Testing update Match', async () => {
+    const match = MatchesMock[0];
+    sinon.stub(MatchesModel, 'update').resolves([1]);
+
+    const {status, body} = await chai.request(app).put('/matches/1').send(match);
+
+    expect(status).to.be.eq(200);
+    expect(body).to.be.deep.eq({message: 'Match updated successfully'});
   });
 });

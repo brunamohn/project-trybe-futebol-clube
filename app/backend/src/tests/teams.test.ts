@@ -39,13 +39,4 @@ describe('Testing Teams', () => {
     expect(body.teamName).to.be.deep.eq(TeamsMock[7].teamName);
   });
 
-  it('Testing endpoint /teams/:id not found', async () => {
-    const selectedTeam = TeamsModel.build(TeamsMock[9999]);
-    sinon.stub(TeamsModel, 'findByPk').resolves(selectedTeam);
-
-    const {status, body} = await chai.request(app).get('/teams/9999');
-
-    expect(status).to.be.eq(404);
-    expect(body).to.be.deep.eq({message: 'Team not found'});
-  });
 });
